@@ -1,0 +1,123 @@
+import java.util.Scanner;
+
+// Base class to manage common attributes (name, ID, program)
+public class ClassManage {
+    // Protected variables so child classes can access them
+    protected String n, p;
+    protected int id;
+
+    // Method to set values
+    public void set(String name, int ID, String program) {
+        n = name;
+        id = ID;
+        p = program;
+    }
+
+    // Method to display values
+    public void show() {
+        System.out.println("Name = " + n);
+        System.out.println("ID = " + id);
+        System.out.println("Program = " + p);
+    }
+
+    // Main method (program entry point)
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+
+        // Taking user input
+        System.out.print("Enter your name: ");
+        String name = in.nextLine();
+
+        System.out.print("Enter your ID: ");
+        int ID = in.nextInt();
+        in.nextLine(); // Clear buffer
+
+        System.out.print("Enter your program: ");
+        String program = in.nextLine();
+
+        System.out.print("Are you teacher or student? ");
+        String who = in.nextLine();
+
+        // Check user type and create object accordingly
+        if (who.equals("teacher")) {
+            Teacher obj = new Teacher();  // Create Teacher object
+            obj.set(name, ID, program);   // Set values
+            obj.show();                  // Display info
+            obj.subject();               // Show subject
+        } 
+        else if (who.equals("student")) {
+            Student obj = new Student(); // Create Student object
+            obj.set(name, ID, program);  // Set values
+            obj.show();                 // Display info
+            obj.subjects();             // Show subjects
+        }
+    }
+}
+
+import java.util.Scanner;
+
+// Student class inheriting from ClassManage
+public class Student extends ClassManage {
+
+    // Method to display subjects based on semester
+    public void subjects() {
+        System.out.print("Enter your Semester (1-3): ");
+        Scanner input = new Scanner(System.in);
+
+        int sem = input.nextInt();
+
+        // Check semester and display subjects
+        if (sem == 1) {
+            System.out.println("Your Subjects:");
+            System.out.println("1. ICT");
+            System.out.println("2. English");
+            System.out.println("3. Ideology");
+        } 
+        else if (sem == 2) {
+            System.out.println("Your Subjects:");
+            System.out.println("1. DLD");
+            System.out.println("2. Programming Fundamentals");
+            System.out.println("3. Civics");
+        } 
+        else if (sem == 3) {
+            System.out.println("Your Subjects:");
+            System.out.println("1. COAL");
+            System.out.println("2. OOP");
+            System.out.println("3. Computer Networks");
+        } 
+        else {
+            System.out.println("Invalid semester");
+        }
+    }
+}
+
+import java.util.Scanner;
+
+// Teacher class inheriting from ClassManage
+public class Teacher extends ClassManage {
+
+    // Method to display subject based on semester
+    public void subject() {
+        System.out.print("Enter your Semester (1-3): ");
+        Scanner input = new Scanner(System.in);
+
+        int sem = input.nextInt();
+
+        // Check semester and display subject
+        if (sem == 1) {
+            System.out.println("Your Subjects:");
+            System.out.println("1. ICT");
+        } 
+        else if (sem == 2) {
+            System.out.println("Your Subjects:");
+            System.out.println("1. DLD");
+        } 
+        else if (sem == 3) {
+            System.out.println("Your Subjects:");
+            System.out.println("1. COAL");
+        } 
+        else {
+            System.out.println("Invalid semester");
+        }
+    }
+}
